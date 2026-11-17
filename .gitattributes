@@ -1,3 +1,6 @@
+# LF on every OS: heredocs in the tests hold expected output.
+* text=auto eol=lf
+
 # GEDCOM fixtures must stay byte-exact on every OS.
 *.ged binary
 *.gdz binary
