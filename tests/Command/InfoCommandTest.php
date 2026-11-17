@@ -16,7 +16,7 @@ final class InfoCommandTest extends CommandTestCase
         $tester = $this->command('info', ['file' => self::FAMILY]);
 
         self::assertSame(0, $tester->getStatusCode());
-        $display = $tester->getDisplay();
+        $display = $tester->getDisplay(true);
         self::assertMatchesRegularExpression('/^Version +5\.5\.1$/m', $display);
         self::assertMatchesRegularExpression('/^Encoding +UTF-8, LF$/m', $display);
         self::assertMatchesRegularExpression('/^Program +Korin$/m', $display);
@@ -31,11 +31,11 @@ final class InfoCommandTest extends CommandTestCase
         $tester = $this->command('info', ['file' => $path]);
         $verbose = $this->command('info', ['file' => $path], OutputInterface::VERBOSITY_VERBOSE);
 
-        self::assertMatchesRegularExpression('/^Version +5\.5\.1 \(declares 5\.5\)$/m', $tester->getDisplay());
-        self::assertMatchesRegularExpression('/^Encoding +Windows-1252 \(CHAR ANSI\), CRLF$/m', $tester->getDisplay());
-        self::assertMatchesRegularExpression('/^Program +Personal Ancestral File 5\.2\.18\.0$/m', $tester->getDisplay());
-        self::assertStringContainsString('(-v to list)', $tester->getDisplay());
-        self::assertStringContainsString('KV1010 info', $verbose->getDisplay());
+        self::assertMatchesRegularExpression('/^Version +5\.5\.1 \(declares 5\.5\)$/m', $tester->getDisplay(true));
+        self::assertMatchesRegularExpression('/^Encoding +Windows-1252 \(CHAR ANSI\), CRLF$/m', $tester->getDisplay(true));
+        self::assertMatchesRegularExpression('/^Program +Personal Ancestral File 5\.2\.18\.0$/m', $tester->getDisplay(true));
+        self::assertStringContainsString('(-v to list)', $tester->getDisplay(true));
+        self::assertStringContainsString('KV1010 info', $verbose->getDisplay(true));
     }
 
     #[Test]
@@ -65,9 +65,9 @@ final class InfoCommandTest extends CommandTestCase
         $format = $this->command('info', ['file' => self::FAMILY, '--format' => 'xml']);
 
         self::assertSame(2, $missing->getStatusCode());
-        self::assertStringContainsString('Cannot read', $missing->getDisplay());
+        self::assertStringContainsString('Cannot read', $missing->getDisplay(true));
         self::assertSame(2, $encoding->getStatusCode());
-        self::assertStringContainsString('Unknown encoding KOI8-U', $encoding->getDisplay());
+        self::assertStringContainsString('Unknown encoding KOI8-U', $encoding->getDisplay(true));
         self::assertSame(2, $format->getStatusCode());
     }
 
@@ -88,6 +88,6 @@ final class InfoCommandTest extends CommandTestCase
         $zip->close();
 
         self::assertSame(['INDI' => 2, 'SUBM' => 1, 'FAM' => 1], self::json($this->command('info', ['file' => $path, '--format' => 'json']))['records']);
-        self::assertStringContainsString('has no gedcom.ged', $this->command('info', ['file' => $empty])->getDisplay());
+        self::assertStringContainsString('has no gedcom.ged', $this->command('info', ['file' => $empty])->getDisplay(true));
     }
 }

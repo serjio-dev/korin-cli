@@ -51,7 +51,7 @@ abstract class CommandTestCase extends TestCase
     /** @return array<mixed> */
     protected static function json(CommandTester $tester): array
     {
-        $data = json_decode($tester->getDisplay(), true, flags: JSON_THROW_ON_ERROR);
+        $data = json_decode($tester->getDisplay(true), true, flags: JSON_THROW_ON_ERROR);
         self::assertIsArray($data);
 
         return $data;

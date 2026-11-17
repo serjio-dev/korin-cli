@@ -18,7 +18,7 @@ final class ConvertCommandTest extends CommandTestCase
         $tester = $this->command('convert', ['input' => self::FAMILY, 'output' => $output, '--to' => '7.0']);
 
         self::assertSame(0, $tester->getStatusCode());
-        self::assertStringContainsString('nothing lost', $tester->getDisplay());
+        self::assertStringContainsString('nothing lost', $tester->getDisplay(true));
         self::assertStringContainsString("1 GEDC\n2 VERS 7.0\n", (string) file_get_contents($output));
         self::assertSame(['family-7.ged'], $this->files(), 'No temporary file is left');
     }
@@ -33,8 +33,8 @@ final class ConvertCommandTest extends CommandTestCase
         $json = self::json($this->command('convert', ['input' => $input, 'output' => $output, '--to' => '5.5.1', '--format' => 'json']));
 
         self::assertSame(0, $tester->getStatusCode());
-        self::assertMatchesRegularExpression('/^KL\d{4} warning line 5 \(@I1@\/SEX\)/m', $tester->getDisplay());
-        self::assertStringContainsString('Converted to GEDCOM 5.5.1 in ' . $output . ': 1 loss', $tester->getDisplay());
+        self::assertMatchesRegularExpression('/^KL\d{4} warning line 5 \(@I1@\/SEX\)/m', $tester->getDisplay(true));
+        self::assertStringContainsString('Converted to GEDCOM 5.5.1 in ' . $output . ': 1 loss', $tester->getDisplay(true));
         $report = json_decode((string) file_get_contents($losses), true, flags: JSON_THROW_ON_ERROR);
         self::assertIsArray($report);
         self::assertSame($report, $json['losses']);
@@ -69,7 +69,7 @@ final class ConvertCommandTest extends CommandTestCase
         ] as [$options, $message]) {
             $tester = $this->command('convert', $options + ['input' => self::FAMILY, 'output' => $output]);
             self::assertSame(2, $tester->getStatusCode(), $message);
-            self::assertStringContainsString($message, $tester->getDisplay());
+            self::assertStringContainsString($message, $tester->getDisplay(true));
         }
         self::assertFileDoesNotExist($output);
     }

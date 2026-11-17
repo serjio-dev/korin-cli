@@ -21,9 +21,9 @@ final class DiffCommandTest extends CommandTestCase
 
         $tester = $this->command('diff', ['first' => self::FAMILY, 'second' => $path, '--ignore' => ['char']]);
 
-        self::assertSame(0, $tester->getStatusCode(), $tester->getDisplay());
-        self::assertStringContainsString('No differences', $tester->getDisplay());
-        self::assertStringContainsString('5.5.1, Windows-1251', $tester->getDisplay());
+        self::assertSame(0, $tester->getStatusCode(), $tester->getDisplay(true));
+        self::assertStringContainsString('No differences', $tester->getDisplay(true));
+        self::assertStringContainsString('5.5.1, Windows-1251', $tester->getDisplay(true));
     }
 
     #[Test]
@@ -49,8 +49,8 @@ final class DiffCommandTest extends CommandTestCase
             - @I2@ INDI
             + @I3@ INDI
             1 changed, 1 removed, 1 added
-            TEXT, $tester->getDisplay());
-        self::assertStringNotContainsString('CHAN', $ignored->getDisplay());
+            TEXT, $tester->getDisplay(true));
+        self::assertStringNotContainsString('CHAN', $ignored->getDisplay(true));
     }
 
     #[Test]

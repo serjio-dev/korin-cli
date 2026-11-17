@@ -17,7 +17,7 @@ final class ValidateCommandTest extends CommandTestCase
         $tester = $this->command('validate', ['file' => self::FAMILY, '--plausibility' => true]);
 
         self::assertSame(0, $tester->getStatusCode());
-        self::assertStringContainsString('(GEDCOM 5.5.1): valid', $tester->getDisplay());
+        self::assertStringContainsString('(GEDCOM 5.5.1): valid', $tester->getDisplay(true));
     }
 
     #[Test]
@@ -26,8 +26,8 @@ final class ValidateCommandTest extends CommandTestCase
         $tester = $this->command('validate', ['file' => $this->file('invalid.ged', self::INVALID)]);
 
         self::assertSame(1, $tester->getStatusCode());
-        self::assertMatchesRegularExpression('/^KV\d{4} error line 7 \(@I1@\/SEX\)/m', $tester->getDisplay());
-        self::assertMatchesRegularExpression('/: \d+ errors?/', $tester->getDisplay());
+        self::assertMatchesRegularExpression('/^KV\d{4} error line 7 \(@I1@\/SEX\)/m', $tester->getDisplay(true));
+        self::assertMatchesRegularExpression('/: \d+ errors?/', $tester->getDisplay(true));
     }
 
     #[Test]
