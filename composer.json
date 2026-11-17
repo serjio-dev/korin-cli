@@ -1,0 +1,41 @@
+{
+    "name": "korin/gedcom-cli",
+    "description": "Command-line tool for GEDCOM files: info, validate, convert and diff, built on korin/gedcom",
+    "type": "library",
+    "license": "Apache-2.0",
+    "keywords": ["gedcom", "genealogy", "family-tree", "cli", "validator", "converter"],
+    "homepage": "https://github.com/serjio-dev/korin-cli",
+    "require": {
+        "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0 || ~8.6.0",
+        "korin/gedcom": "dev-main",
+        "symfony/console": "^6.4 || ^7.0 || ^8.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.95",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpunit/phpunit": "^11.5 || ^12.5 || ^13"
+    },
+    "suggest": {
+        "ext-intl": "Exact Unicode normalization (NFC) for ANSEL input",
+        "ext-mbstring": "Faster UTF-16 and single-byte decoding",
+        "ext-zip": "GEDZIP (.gdz) input"
+    },
+    "autoload": {
+        "psr-4": { "Korin\\Gedcom\\Cli\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Korin\\Gedcom\\Cli\\Tests\\": "tests/" }
+    },
+    "bin": ["bin/korin"],
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": "phpunit",
+        "stan": "phpstan analyse",
+        "cs": "php-cs-fixer check --diff",
+        "cs-fix": "php-cs-fixer fix",
+        "check": ["@cs", "@stan", "@test"]
+    }
+}
