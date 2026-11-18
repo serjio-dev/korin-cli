@@ -7,7 +7,14 @@ commands and output.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-18
+
+The first release, on korin/gedcom 0.5.
+
 ### Added
 
 - `info`, `validate`, `convert` and `diff` commands, on korin/gedcom 0.5: text and JSON output,
   `.gdz` input, files of any size.
+
+[Unreleased]: https://github.com/serjio-dev/korin-cli/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/serjio-dev/korin-cli/releases/tag/v0.1.0
