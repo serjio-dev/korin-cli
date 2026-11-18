@@ -32,7 +32,7 @@ Diagnostics  1 warning, 1 info (-v to list)
 
 A version or encoding in parentheses is what the file declares, when it is read otherwise:
 the file is mistaken, or its program is known to write something else
-([dialects](https://github.com/serjio-dev/korin-php/blob/main/docs/dialects.md)).
+([dialects](https://serjio-dev.github.io/korin-php/dialects/)).
 
 ### validate
 
@@ -46,7 +46,7 @@ family.ged (GEDCOM 5.5): 1 error, 2 warnings, 1 info
 ```
 
 `--disable KV1101` (repeatable) leaves a code out, `--fail-on warning` exits with 1 on warnings
-too. The codes are listed in [diagnostics.md](https://github.com/serjio-dev/korin-php/blob/main/docs/diagnostics.md).
+too. The codes are listed in [diagnostics.md](https://serjio-dev.github.io/korin-php/diagnostics/).
 
 ### convert
 
