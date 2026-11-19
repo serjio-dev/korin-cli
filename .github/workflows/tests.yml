@@ -21,13 +21,16 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        php: ['8.2', '8.3', '8.4', '8.5']
+        php: ['8.2', '8.3', '8.4', '8.5', '8.6']
         dependencies: [highest]
         include:
           # The lowest Symfony components predate PHP 8.4 and trigger its deprecations.
           - { os: ubuntu-latest, php: '8.2', dependencies: lowest }
+          # Windows and macOS on the oldest and newest supported PHP, as korin/gedcom.
           - { os: windows-latest, php: '8.2', dependencies: highest }
-          - { os: macos-latest, php: '8.5', dependencies: highest }
+          - { os: windows-latest, php: '8.6', dependencies: highest }
+          - { os: macos-latest, php: '8.2', dependencies: highest }
+          - { os: macos-latest, php: '8.6', dependencies: highest }
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -49,6 +52,10 @@ jobs:
         with:
           php-version: '8.2'
           coverage: none
+          tools: composer-require-checker, composer-unused
       - uses: ramsey/composer-install@v3
       - run: composer cs
       - run: vendor/bin/phpstan analyse --no-progress
+      # No hidden dependencies: zip is optional (composer.json suggest), see composer-require-checker.json.
+      - run: composer-require-checker check composer.json
+      - run: composer-unused --no-progress

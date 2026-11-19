@@ -7,6 +7,13 @@ commands and output.
 
 ## [Unreleased]
 
+### Changed
+
+- CI as korin/gedcom: PHP 8.6 is a required version (Windows and macOS on 8.2 and 8.6), a
+  non-blocking `php-nightly` workflow, `composer-require-checker` and `composer-unused`,
+  Dependabot for Composer and Actions, and a `release` workflow that publishes a tag's GitHub
+  Release with its CHANGELOG notes and an attested package archive.
+
 ## [0.1.0] - 2026-11-18
 
 The first release, on korin/gedcom 0.5.
