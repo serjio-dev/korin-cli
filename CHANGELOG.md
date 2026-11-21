@@ -13,6 +13,9 @@ commands and output.
   non-blocking `php-nightly` workflow, `composer-require-checker` and `composer-unused`,
   Dependabot for Composer and Actions, and a `release` workflow that publishes a tag's GitHub
   Release with its CHANGELOG notes and an attested package archive.
+- korin/gedcom `^1.0@RC` (was `^0.5`), with no change to the commands or their output. The next
+  release waits for korin/gedcom 1.0.0 and requires `^1.0`: Composer reads a stability flag only
+  in the root package, so a release on `@RC` would not install for others.
 
 ## [0.1.0] - 2026-11-18
 
