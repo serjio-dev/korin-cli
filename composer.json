@@ -7,7 +7,7 @@
     "homepage": "https://github.com/serjio-dev/korin-cli",
     "require": {
         "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0 || ~8.6.0",
-        "korin/gedcom": "^0.5",
+        "korin/gedcom": "^1.0@RC",
         "symfony/console": "^6.4 || ^7.0 || ^8.0"
     },
     "require-dev": {
